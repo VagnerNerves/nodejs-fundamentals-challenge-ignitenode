@@ -7,7 +7,7 @@
     🔗 <a href="https://URLThisProject.com">https://URLThisProject.com</a> 🔗
   </p>   -->
 
-We have developed the backend in Node.js to create a task API with the following functionalities:
+I developed the backend in Node.js to create a task API with the following functionalities:
 
 - Task Creation:
 
