@@ -57,4 +57,15 @@ export class Database {
 
     return { isExistId };
   }
+
+  delete(table, id) {
+    const { rowIndex, isExistId } = this.#searchId(table, id);
+
+    if (isExistId) {
+      this.#database[table].splice(rowIndex, 1);
+      this.#persist();
+    }
+
+    return { isExistId };
+  }
 }
