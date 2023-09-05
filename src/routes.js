@@ -21,6 +21,12 @@ export const routes = [
     handler: (req, res) => {
       const { title, description } = req.body;
 
+      if (!title && !description) {
+        const error = { error: "Nenhum dado fornecido" };
+
+        return res.writeHead(400).end(JSON.stringify(error));
+      }
+
       const date = new Date();
 
       const task = {
