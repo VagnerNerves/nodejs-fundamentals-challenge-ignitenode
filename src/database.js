@@ -36,4 +36,25 @@ export class Database {
 
     return data;
   }
+
+  #searchId(table, id) {
+    const rowIndex = this.#database[table].findIndex((row) => row.id === id);
+
+    return { rowIndex, isExistId: !rowIndex };
+  }
+
+  update(table, id, data) {
+    const { rowIndex, isExistId } = this.#searchId(table, id);
+
+    if (isExistId) {
+      this.#database[table][rowIndex] = {
+        ...this.#database[table][rowIndex],
+        ...data,
+      };
+
+      this.#persist();
+    }
+
+    return { isExistId };
+  }
 }
