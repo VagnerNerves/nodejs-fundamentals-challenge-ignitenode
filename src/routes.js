@@ -65,7 +65,24 @@ export const routes = [
       const { isExistId } = database.update("tasks", id, data);
 
       if (isExistId) {
-        return res.writeHead(201).end();
+        return res.writeHead(204).end();
+      } else {
+        const error = { error: "Id informado não existe." };
+
+        return res.writeHead(400).end(JSON.stringify(error));
+      }
+    },
+  },
+  {
+    method: "DELETE",
+    path: buildRoutePath("/tasks/:id"),
+    handler: (req, res) => {
+      const { id } = req.params;
+
+      const { isExistId } = database.delete("tasks", id);
+
+      if (isExistId) {
+        return res.writeHead(204).end();
       } else {
         const error = { error: "Id informado não existe." };
 
