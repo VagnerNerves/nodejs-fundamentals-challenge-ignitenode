@@ -96,4 +96,22 @@ export const routes = [
       }
     },
   },
+  {
+    method: "PATCH",
+    path: buildRoutePath("/tasks/:id/complete"),
+    handler: (req, res) => {
+      const { id } = req.params;
+      const data = { updated_at: new Date() };
+
+      const { isExistId } = database.update("tasks", id, data, true);
+
+      if (isExistId) {
+        return res.writeHead(204).end();
+      } else {
+        const error = { error: "Id informado não existe." };
+
+        return res.writeHead(400).end(JSON.stringify(error));
+      }
+    },
+  },
 ];
