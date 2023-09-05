@@ -43,13 +43,22 @@ export class Database {
     return { rowIndex, isExistId: !rowIndex };
   }
 
-  update(table, id, data) {
+  update(table, id, data, complete) {
     const { rowIndex, isExistId } = this.#searchId(table, id);
 
     if (isExistId) {
+      let completed_at = null;
+      if (complete) {
+        completed_at =
+          this.#database[table][rowIndex].completed_at === null
+            ? data.updated_at
+            : null;
+      }
+
       this.#database[table][rowIndex] = {
         ...this.#database[table][rowIndex],
         ...data,
+        completed_at,
       };
 
       this.#persist();
