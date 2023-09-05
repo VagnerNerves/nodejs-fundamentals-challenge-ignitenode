@@ -138,6 +138,12 @@ Start the server
   npm run dev
 ```
 
+To run the CSV file, execute the command:
+
+```bash
+  node ./stream/import-csv-stream.js
+```
+
 <!-- ### Front-end Web
 
 Clone the project
